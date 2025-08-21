@@ -3,6 +3,7 @@
 # --- Configuration ---
 GROUP_NAME="main-sg"
 INSTANCE_TYPE="t3.micro"
+TAG_NAME="main-instance"
 UBUNTU_AMI_PARAMETER="/aws/service/canonical/ubuntu/server/22.04/stable/current/amd64/hvm/ebs-gp2/ami-id"
 BLOCK_DEVICE_MAPPING='[{"DeviceName":"/dev/sda1","Ebs":{"VolumeSize":8,"VolumeType":"gp3","DeleteOnTermination":true}}]'
 ROLE_NAME="SSMInstanceRole"
@@ -103,6 +104,7 @@ INSTANCE_ID=$(aws ec2 run-instances \
     --security-group-ids "$SG_ID" \
     --iam-instance-profile Name="$INSTANCE_PROFILE_NAME" \
     --block-device-mappings "$BLOCK_DEVICE_MAPPING" \
+    --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$TAG_NAME}]" \
     --count 1 \
     --query "Instances[0].InstanceId" \
     --output text)
