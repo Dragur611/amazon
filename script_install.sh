@@ -52,7 +52,7 @@ configure_firewall() {
     sudo ufw allow "$PROXY_PORT"
     sudo ufw allow ssh
     echo "y" | sudo ufw enable
-    sudo ufw status verbose
+    sudo ufw status verbose | cat
 }
 
 configure_danted() {

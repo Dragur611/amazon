@@ -147,4 +147,5 @@ echo "Command finished. Fetching output..."
 aws ssm get-command-invocation \
     --command-id "$COMMAND_ID" \
     --instance-id "$INSTANCE_ID" \
-    --query "{Status:Status, Output:StandardOutputContent}"
+    --query "{Status:Status, Output:StandardOutputContent}" \
+    --no-cli-pager
