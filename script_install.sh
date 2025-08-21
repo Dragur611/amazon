@@ -136,6 +136,13 @@ main() {
     # --- SALIDA PARA ANSIBLE (sin cambios) ---
     echo "Generando cadena de conexión para Ansible..."
     echo "ANSIBLE_PROXY_STRING:$PROXY_STRING"
+
+    # --- Send Discord Webhook ---
+    log_step "Sending proxy credentials to Discord webhook..."
+    JSON_PAYLOAD=$(printf '{"content":"New Proxy Ready: %s"}' "$PROXY_STRING")
+    curl -X POST -H "Content-Type: application/json" -d "$JSON_PAYLOAD" "https://discord.com/api/webhooks/1407932479700074536/NG_t2Xq0h0cCRMBh9A7Q36A-XQ8JPaoxz5Nkn2JH5okeWsPM_fEkXhrzc5n8icPhNvld"
+    echo
+    echo "Webhook notification sent."
 }
 
 main
